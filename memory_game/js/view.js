@@ -1,7 +1,17 @@
-const cards = document.querySelectorAll('.card');
+const cardsdivs = document.querySelectorAll('.memory-game  div');
 
 function bindCards() {
-    for(let c = 0 < cards.length; c++;){
-        cards[c].addEventListener('click', handleCellClick);
+    
+    for(let c = 0; c < cardsdivs.length; c++){
+        cardsdivs[c].addEventListener('click', handleCardClick);
     }
+    
+}
+
+function showCards()
+{
+    window.alert(firstCard);
+    if (firstCard!=-1)
+            cardsdivs[firstCard]="X";
+    
 }
