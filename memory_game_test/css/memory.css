@@ -1,14 +1,14 @@
 body {
   font-family: Arial, sans-serif;
   text-align: center;
-  background-color: #f4f4f4;
 }
 
 h1 {
   margin-bottom: 20px;
+  text-align: center;
 }
 
-.game-board {
+.memory-game {
   display: grid;
   grid-template-columns: repeat(4, 100px);
   gap: 10px;
@@ -18,10 +18,9 @@ h1 {
 .card {
   width: 100px;
   height: 100px;
-  background-color: #3498db;
+  background-color: #a1daff;
   color: white;
   font-size: 40px;
-  display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
@@ -29,6 +28,6 @@ h1 {
 }
 
 .card.flipped {
-  background-color: #2ecc71;
+  background-color: #c2fd55;
   cursor: default;
 }
