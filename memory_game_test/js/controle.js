@@ -1,14 +1,34 @@
 function handleCardClick(event){
-    console.log(event.target.id);
-    console.log(firstCard);
+    if (typeof lockBoard !== 'undefined' && lockBoard) return;
+    const idx = Number(event.target.id);
+    if (Number.isNaN(idx)) return;
+    if (matched[idx]) return;
+    if (idx === firstCard) return;
 
-    if (firstCard==-1) {
-        firstCard=Number(event.target.id);
-        window.alert(firstCard);
-    } else {
-        secondCard=event.target.id;
+    if (firstCard === -1) {
+        firstCard = idx;
+        showCards();
+        return;
     }
-    
+
+    secondCard = idx;
     showCards();
-    console.log(cards);
+
+    if (cards[firstCard] === cards[secondCard]) {
+        matched[firstCard] = true;
+        matched[secondCard] = true;
+        firstCard = -1;
+        secondCard = -1;
+        if (matched.every(Boolean)) {
+            setTimeout(() => alert('You win!'), 200);
+        }
+    } else {
+        lockBoard = true;
+        setTimeout(() => {
+            firstCard = -1;
+            secondCard = -1;
+            lockBoard = false;
+            showCards();
+        }, 800);
+    }
 }

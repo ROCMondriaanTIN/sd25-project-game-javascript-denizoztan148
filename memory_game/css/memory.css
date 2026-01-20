@@ -21,6 +21,7 @@ h1 {
   background-color: #a1daff;
   color: white;
   font-size: 40px;
+  display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
