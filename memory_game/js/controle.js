@@ -1,14 +1,35 @@
 function handleCardClick(event){
-    console.log(event.target.id);
-    console.log(firstCard);
-
-    if (firstCard==-1) {
-        firstCard=Number(event.target.id);
-        window.alert(firstCard);
+    console.log('Card clicked:', event.target.id);
+    if(isFirstCard()) {
+        const idx = Number(event.target.id);
+        viewCards[idx]=1;   
+        showCards();
     } else {
-        secondCard=event.target.id;
+        const idx = Number(event.target.id);
+        viewCards[idx]=1;   
+        showCards();
+        setTimeout(() => {
+            handleCheckMatch();
+        }, 800);
     }
     
-    showCards();
-    console.log(cards);
-}
+
+        function handleCheckMatch() {
+            
+            const firstIdx = viewCards.indexOf(1);
+            const secondIdx = viewCards.lastIndexOf(1);
+            alert('Checking match' + firstIdx + ' ' + secondIdx );
+            if(cards[firstIdx] == cards[secondIdx]) {
+                viewCards[firstIdx]=2;
+                viewCards[secondIdx]=2;
+                showCards();
+            } else {
+                viewCards[firstIdx]=0;
+                viewCards[secondIdx]=0;
+                console.log('No match');
+                console.log(viewCards);
+                showCards();
+            }
+        }
+
+} 

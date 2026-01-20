@@ -18,10 +18,10 @@ h1 {
 .card {
   width: 100px;
   height: 100px;
-  background-color: #a1daff;
+  background-color:#c2fd55;
   color: white;
   font-size: 40px;
-  display: flex;
+  
   align-items: center;
   justify-content: center;
   cursor: pointer;
@@ -29,6 +29,6 @@ h1 {
 }
 
 .card.flipped {
-  background-color: #c2fd55;
+  background-color:#a1daff;
   cursor: default;
 }

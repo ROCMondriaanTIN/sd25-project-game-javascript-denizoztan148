@@ -9,7 +9,18 @@ function bindCards() {
 }
 
 function showCards() {
+    console.log(viewCards);
     for (let i = 0; i < cardsdivs.length; i++) {
+        if(viewCards[i]==1 || viewCards[i]==2) {
+            cardsdivs[i].innerHTML=cards[i];
+        } else {
+            cardsdivs[i].innerHTML='';
+        }
+        
+    }
+
+
+    /*for (let i = 0; i < cardsdivs.length; i++) {
         if (typeof matched !== 'undefined' && (matched[i] || i === firstCard || i === secondCard)) {
             cardsdivs[i].textContent = cards[i];
             cardsdivs[i].classList.add('flipped');
@@ -17,5 +28,5 @@ function showCards() {
             cardsdivs[i].textContent = '';
             cardsdivs[i].classList.remove('flipped');
         }
-    }
+    }*/
 }
