@@ -34,7 +34,18 @@ function handleCardClick(event){
         showCards();
     }
 
-    if (!viewCards.includes(1)) {
-        alert("U hebt gewonnen!");
-}
+    let victory = true;
+
+    for (let i = 0; i < viewCards.length; i++){
+        if (viewCards[i] !==2) {
+            victory = false;
+            break;
+        }
+    }
+
+    if (victory) {
+        setTimeout(() => {
+            alert("U hebt gewonnen!");
+        }, 300)
+    }
 }
