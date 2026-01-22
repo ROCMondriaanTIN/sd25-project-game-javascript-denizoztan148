@@ -1,35 +1,40 @@
+
 function handleCardClick(event){
-    console.log('Card clicked:', event.target.id);
+    if (lockBoard) return;
+
+    const idx = Number(event.target.id);
+    if (viewCards[idx] !== 0) return;
+
     if(isFirstCard()) {
-        const idx = Number(event.target.id);
-        viewCards[idx]=1;   
+        viewCards[idx] = 1;
         showCards();
     } else {
-        const idx = Number(event.target.id);
-        viewCards[idx]=1;   
+        viewCards[idx] = 1;
         showCards();
+        lockBoard = true;
+
         setTimeout(() => {
             handleCheckMatch();
+            lockBoard = false;
         }, 800);
     }
-    
 
-        function handleCheckMatch() {
-            
-            const firstIdx = viewCards.indexOf(1);
-            const secondIdx = viewCards.lastIndexOf(1);
-            alert('Checking match' + firstIdx + ' ' + secondIdx );
-            if(cards[firstIdx] == cards[secondIdx]) {
-                viewCards[firstIdx]=2;
-                viewCards[secondIdx]=2;
-                showCards();
-            } else {
-                viewCards[firstIdx]=0;
-                viewCards[secondIdx]=0;
-                console.log('No match');
-                console.log(viewCards);
-                showCards();
-            }
+    function handleCheckMatch() {
+        const firstIdx = viewCards.indexOf(1);
+        const secondIdx = viewCards.lastIndexOf(1);
+
+        if(cards[firstIdx] == cards[secondIdx]) {
+            viewCards[firstIdx] = 2;
+            viewCards[secondIdx] = 2;
+        } else {
+            viewCards[firstIdx] = 0;
+            viewCards[secondIdx] = 0;
         }
 
-} 
+        showCards();
+    }
+
+    if (!viewCards.includes(1)) {
+        alert("U hebt gewonnen!");
+}
+}
