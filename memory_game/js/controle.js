@@ -1,51 +1,50 @@
-
-function handleCardClick(event){
-    if (lockBoard) return;
+function handleCardClick(event) {
+    if (lockBoard || victory) return;
 
     const idx = Number(event.target.id);
     if (viewCards[idx] !== 0) return;
 
-    if(isFirstCard()) {
-        viewCards[idx] = 1;
-        showCards();
-    } else {
-        viewCards[idx] = 1;
-        showCards();
+    viewCards[idx] = 1;
+    showCards();
+
+    const flippedCards = viewCards.filter(v => v === 1).length;
+
+    if (flippedCards === 2) {
         lockBoard = true;
+        setTimeout(checkMatch, 800);
+    }
+}
 
-        setTimeout(() => {
-            handleCheckMatch();
-            lockBoard = false;
-        }, 800);
+function checkMatch() {
+    const firstIdx = viewCards.indexOf(1);
+    const secondIdx = viewCards.lastIndexOf(1);
+
+    if (cards[firstIdx] === cards[secondIdx]) {
+        viewCards[firstIdx] = 2;
+        viewCards[secondIdx] = 2;
+        addScore();
+    } else {
+        viewCards[firstIdx] = 0;
+        viewCards[secondIdx] = 0;
     }
 
-    function handleCheckMatch() {
-        const firstIdx = viewCards.indexOf(1);
-        const secondIdx = viewCards.lastIndexOf(1);
+    showCards();
+    lockBoard = false;
+    checkVictory();
+}
 
-        if(cards[firstIdx] == cards[secondIdx]) {
-            viewCards[firstIdx] = 2;
-            viewCards[secondIdx] = 2;
-        } else {
-            viewCards[firstIdx] = 0;
-            viewCards[secondIdx] = 0;
-        }
+function addScore() {
+    score += 12.5;
+    document.getElementById("score").innerText = "Score: " + score;
+}
 
-        showCards();
+function checkVictory() {
+    for (let i = 0; i < viewCards.length; i++) {
+        if (viewCards[i] !== 2) return;
     }
 
-    let victory = true;
-
-    for (let i = 0; i < viewCards.length; i++){
-        if (viewCards[i] !==2) {
-            victory = false;
-            break;
-        }
-    }
-
-    if (victory) {
-        setTimeout(() => {
-            alert("U hebt gewonnen!");
-        }, 300)
-    }
+    victory = true;
+    setTimeout(() => {
+        alert("🎉U hebt gewonnen!🎉");
+    }, 300);
 }

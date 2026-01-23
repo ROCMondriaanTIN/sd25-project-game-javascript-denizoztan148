@@ -1,19 +1,23 @@
-window.onload=start;
+window.onload = start;
 
-function start(){
+function start() {
     bindCards();
     showCards();
 }
 
 const restart = document.getElementById("restart");
- 
 restart.addEventListener("click", restartGame);
- 
+
 function restartGame() {
     viewCards = new Array(cards.length).fill(0);
- 
+    score = 0;
+    victory = false;
+
+    document.getElementById("score").innerText = "Score: 0";
+
     cards.sort(() => 0.5 - Math.random());
- 
+
     bindCards();
     showCards();
 }
+ 

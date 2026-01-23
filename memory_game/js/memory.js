@@ -1,17 +1,11 @@
 const memoryGame = document.getElementById("memoryGame");
 
-const cards = ["🍎", "🍎", "🍌", "🍌", "🍇", "🍇", "🍓", "🍓", "🍒", "🍒", "🍍", "🍍", "🍉", "🍉", "🍋", "🍋"];
-let viewCards=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+const cards = ["🍎","🍎","🍌","🍌","🍇","🍇","🍓","🍓","🍒","🍒","🍍","🍍","🍉","🍉","🍋","🍋"];
+let viewCards = new Array(16).fill(0);
 
 let lockBoard = false;
-let matched = new Array(cards.length).fill(false);
+let score = 0;
+let victory = false;
 
 cards.sort(() => 0.5 - Math.random());
-
-function isFirstCard() {
-    if (viewCards.indexOf(1)==-1) {
-        return true;    
-    } else {
-        return false;
-    }
-}
+ 
